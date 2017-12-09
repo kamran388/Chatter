@@ -1,0 +1,20 @@
+{% extends 'chat/master.html' %}
+{% load humanize%}
+
+{% block title %}
+  Chatter Details
+{% endblock %}
+{%block content%}
+    <h2>Details:</h2>
+    <br/>
+
+    <dl>
+      <dt>{{ chat.text }}<br/></dt>
+      <br/>
+      <dt>{{chat.created_on|naturaltime}}</dt>
+      <dt>{% if chat.via%}
+          <a href="{{chat.via}}"> Posted Via </a>
+        {%endif%}
+      </dt>
+    </dl>
+{% endblock %}

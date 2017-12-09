@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  {% load staticfiles %}
+  <link rel="stylesheet" href="{% static 'chat/style.css' %}">
+  <title>{% block title %} Chatter Blah Blah Blah {% endblock %}</title>
+
+</head>
+<body>
+    <header>
+      <nav>
+        {% if user.is_authenticated %}
+          <li>
+            Logged In as: {{user}}.
+          </li>
+          <li><a href="{% url 'newchat' %}">Share a Chat</a></li>
+          <li><a href="{% url 'myview' %}">My Blats</a></li>
+          <li><a href="{% url 'logout' %}?next=/">Logout</a></li>
+        {% else %}
+          <li><a href="{% url 'login' %}?next/">Login</a></li>
+        {% endif %}
+      </nav>
+      <h2><a href="{% url 'homepage' %}"> Chatter </a><h2>
+    </header>
+
+    <div id = "content">
+      {% block content %}
+      {% endblock %}
+    </div>
+</body>
+</html>

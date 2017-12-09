@@ -1,0 +1,29 @@
+{% extends 'chat/master.html' %}
+{% load humanize%}
+
+{% block title %}
+  Home
+{% endblock %}
+
+{% block content %}
+  {% if chat_list %}
+    <dl>
+    {% for chat in chat_list %}
+      <dt>{{ chat.text }}<br/></dt>
+      <dd>
+        {{chat.created_on|naturaltime}} by {{chat.created_by}}
+        <a href="{% url 'detail' pk=chat.id %}">Details</a>
+        {% if chat.via %}
+          <a href="{{chat.via}}"> Posted Via </a>
+        {%endif%}
+
+        {% if chat.created_by == user %}
+          <a href="{% url 'editchat' pk=chat.id %}">Edit</a>
+        {% endif %}
+      </dd>
+    {%endfor%}
+    </dl>
+  {%else%}
+    No Records Found :-(
+  {% endif %}
+{% endblock %}
